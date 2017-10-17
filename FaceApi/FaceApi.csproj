@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>FaceApi</AssemblyName>
+    <RootNamespace>FP.Study.KNN.FaceApi</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="sample.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sample.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ProjectOxford.Face.DotNetStandard" Version="1.0.0" />
+  </ItemGroup>
+
+</Project>
