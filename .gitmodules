@@ -1,0 +1,3 @@
+[submodule "lib/DotNeuralNet"]
+	path = lib/DotNeuralNet
+	url = https://github.com/fpommerening/DotNeuralNet.git
