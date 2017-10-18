@@ -8,6 +8,7 @@ Path: NeuralNetworks/Models/HopfieldNetwork.cs
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using FP.Study.KNN.Hopfield.Data;
 using FP.Study.KNN.Hopfield.Utility;
 using MathNet.Numerics.LinearAlgebra;
 
@@ -31,6 +32,23 @@ namespace FP.Study.KNN.Hopfield
         {
             var randomizer = new Randomizer();
             var inputVectors = _dataReader.ReadHopfieldDataFromTextFile(datafilePath, separator);
+            _numberOfNeurons = inputVectors.First().Data.Count;
+            _biases = randomizer.RandomizeBiases(inputVectors.First().Data.Count);
+            _weights = CreateWeightsMatrixWithHebbsRule(inputVectors);
+        }
+
+        public void TeachWithHebbsRule(Scenario scenario)
+        {
+            var randomizer = new Randomizer();
+
+            var inputVectors = new List<NeuralVector>();
+
+            foreach (var pattern in scenario.Pattern)
+            {
+                var vectorData = pattern.CreateVectorData(scenario.LineCount, scenario.ColumnCount);
+                var neuralInputData = Vector<double>.Build.DenseOfArray(vectorData);
+                inputVectors.Add(new NeuralVector(neuralInputData));
+            }
             _numberOfNeurons = inputVectors.First().Data.Count;
             _biases = randomizer.RandomizeBiases(inputVectors.First().Data.Count);
             _weights = CreateWeightsMatrixWithHebbsRule(inputVectors);
