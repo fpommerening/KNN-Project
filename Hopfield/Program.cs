@@ -11,90 +11,66 @@ namespace FP.Study.KNN.Hopfield
         {
             try
             {
+                var numbers = new Scenarios.Numbers();
 
-                var scenario = new Scenario();
-                scenario.ColumnCount = 3;
-                scenario.LineCount = 5;
-                scenario.Pattern = new Pattern[3];
-                scenario.Pattern[0] = new Pattern
+
+
+                //     var testPattern = new Pattern
+                //     {
+                //        Lines = new Line[]{
+                //            new Line{ Columns = new double[] {1, 1, 1}},
+                //            new Line{ Columns = new double[] {-1, -1, 1}},
+                //            new Line{ Columns = new double[] {1, 1, 1}},
+                //            new Line{ Columns = new double[] {1, -1, -1}},
+                //            new Line{ Columns = new double[] {1, 1, 1}},
+                //           }
+                //   };
+
+                var scenario = numbers.CreateScenario_1_2_7();
+
+                var testPattern = numbers.Number2;
+
+                int matchCount = 0;
+                int nonMatchCount = 0;
+
+                for (int i = 0; i < 10000; i++)
                 {
-                    Name = "Nummer 1",
-                    Lines = new Line[]{
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
+
+                    try
+                    {
+                        var network = new HopfieldNetwork();
+                        network.TeachWithHebbsRule(scenario);
+
+
+                        //  Console.WriteLine("Teste");
+                        //  Console.WriteLine(testPattern);
+
+                        var testingVector = Vector<double>.Build.DenseOfArray(testPattern.CreateVectorData(5, 3));
+
+                        NeuralVector outputVector;
+
+                        outputVector = network.Test(new NeuralVector(testingVector));
+                        var outputPattern = MapToPattern(outputVector, scenario.LineCount, scenario.ColumnCount);
+
+                        if (testPattern.ToString() == outputPattern.ToString())
+                        {
+                            matchCount++;
                         }
-                };
-                scenario.Pattern[1] = new Pattern
-                {
-                    Name = "Nummer 2",
-                    Lines = new Line[]{
-                        new Line{ Columns = new double[] {1, 1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {1, 1, 1}},
-                        new Line{ Columns = new double[] {1, -1,-1}},
-                        new Line{ Columns = new double[] {1, 1, 1}},
+                        else
+                        {
+                            nonMatchCount++;
                         }
-                };
 
-                scenario.Pattern[2] = new Pattern
-                {
-                    Name = "Nummer 7",
-                    Lines = new Line[]{
-                        new Line{ Columns = new double[] {1, 1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        }
-                };
-
-                var testPattern = new Pattern
-                {
-                    Lines = new Line[]{
-                        new Line{ Columns = new double[] {1, 1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {1, 1, 1}},
-                        new Line{ Columns = new double[] {-1, -1, 1}},
-                        new Line{ Columns = new double[] {1, 1, 1}},
-                        }
-                };
-
-                var network = new HopfieldNetwork();
-                network.TeachWithHebbsRule(scenario);
-
-                foreach (var p in scenario.Pattern)
-                {
-                    Console.WriteLine(p);
-                    Console.WriteLine();
+                        // Console.WriteLine("Ergebnis");
+                        //Console.WriteLine(outputPattern);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine("Error on Test");
+                        Console.WriteLine(exception);
+                    }
                 }
-
-
-                Console.WriteLine("Teste");
-                Console.WriteLine(testPattern);
-
-
-                var testingVector = Vector<double>.Build.DenseOfArray(testPattern.CreateVectorData(5, 3));
-                NeuralVector outputVector;
-
-                try
-                {
-                    outputVector = network.Test(new NeuralVector(testingVector));
-                    var outputPattern = MapToPattern(outputVector, scenario.LineCount, scenario.ColumnCount);
-                    Console.WriteLine("Ergebnis");
-                    Console.WriteLine(outputPattern);
-                }
-                catch (Exception exception)
-                {
-                    Console.WriteLine("Error on Test");
-                    Console.WriteLine(exception);
-                }
-
-
-
-
+                Console.Write($"Treffer {matchCount} - {nonMatchCount}");
             }
             catch (Exception ex)
             {
