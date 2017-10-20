@@ -1,11 +1,15 @@
 using System;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace FP.Study.KNN.Hopfield.Data
 {
     public class Pattern
     {
+        [JsonProperty("name")]
         public string Name { get; set; }
+
+        [JsonProperty("lines")]
         public Line[] Lines { get; set; }
 
         public double[] CreateVectorData(int lineCount, int columnCount)
