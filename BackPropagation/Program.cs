@@ -1,6 +1,7 @@
 ﻿using System;
 using DotNeuralNet;
 using DotNeuralNet.BackPropagation;
+using FP.Study.KNN.BackPropagation.Scenarios;
 
 namespace FP.Study.KNN.BackPropagation
 {
@@ -8,33 +9,33 @@ namespace FP.Study.KNN.BackPropagation
     {
         static void Main(string[] args)
         {
-            var network = new Network(2, 4, 1);
+            Scenario scenario = null;
+            //scenario = new LogicXor();
 
+            //scenario = new LogicAnd();
+            scenario = new Letters();
 
-            //Helper_InitWeights(network);
+            var network = Helper.CreateAndTrainNetwork(scenario, 0.5, 10000);
+            
 
-            var trainer = new BackPropagationTrainer(network);
-
-            var rows = new[] {
-                new BackPropagationTrainingRow(new[] { -1.0, -1.0}, new[] { -1.0  }) ,
-                new BackPropagationTrainingRow(new[] { -1.0, 1.0}, new[] {-1.0  }) ,
-                new BackPropagationTrainingRow(new[] { 1.0, -1.0}, new[] {-1.0  }) ,
-                new BackPropagationTrainingRow(new[] { 1.0, 1.0}, new[] {1.0  })
-
-                };
-
-            trainer.Train(rows, 0.5, 10000);
-
-           
-            for (var r = 0; r < rows.Length; r++)
+            for (var r = 0; r < scenario.Pattern.Length; r++)
             {
                 network.Invalidate();
-                for (var i = 0; i < rows[r].Inputs.Length; i++)
+                for (var i = 0; i < scenario.Pattern[r].Inputs.Length; i++)
                 {
-                    network.InputNodes[i].Value = rows[r].Inputs[i];
+                    network.InputNodes[i].Value = scenario.Pattern[r].Inputs[i];
                 }
-                Console.WriteLine(network.OutputNodes[0].Value);
+                for (int i = 0; i < network.OutputNodes.Count; i++)
+                {
+                    Console.WriteLine(network.OutputNodes[i].Value);
+                }
+
+                Console.WriteLine("########################################");
+
+                System.Threading.Thread.Sleep(2000);
             }
+
+            Console.ReadLine();
         }
 
     }

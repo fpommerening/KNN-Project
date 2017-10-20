@@ -3,6 +3,7 @@ using FP.Study.KNN.Hopfield.Data;
 using FP.Study.KNN.Hopfield.Scenarios;
 using FP.Study.KNN.Hopfield.Utility;
 using MathNet.Numerics.LinearAlgebra;
+using Newtonsoft.Json;
 
 namespace FP.Study.KNN.Hopfield
 {
@@ -30,7 +31,12 @@ namespace FP.Study.KNN.Hopfield
                 //var scenario = numbers.CreateScenario_1_2_7();
 
                 var letter = new Letters();
-                var scenario = letter.CreateScenario_Selection();
+                var scenario = letter.CreateScenario_All();
+
+                string output = JsonConvert.SerializeObject(scenario, Formatting.Indented);
+                
+                Console.WriteLine(output);
+                return;
 
                 var testPattern = letter.LetterA;
 
