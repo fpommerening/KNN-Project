@@ -1,5 +1,6 @@
 ﻿using System;
 using FP.Study.KNN.Hopfield.Data;
+using FP.Study.KNN.Hopfield.Scenarios;
 using FP.Study.KNN.Hopfield.Utility;
 using MathNet.Numerics.LinearAlgebra;
 
@@ -26,14 +27,17 @@ namespace FP.Study.KNN.Hopfield
                 //           }
                 //   };
 
-                var scenario = numbers.CreateScenario_1_2_7();
+                //var scenario = numbers.CreateScenario_1_2_7();
 
-                var testPattern = numbers.Number2;
+                var letter = new Letters();
+                var scenario = letter.CreateScenario_Selection();
+
+                var testPattern = letter.LetterA;
 
                 int matchCount = 0;
                 int nonMatchCount = 0;
 
-                for (int i = 0; i < 10000; i++)
+                for (int i = 0; i < 10; i++)
                 {
 
                     try
@@ -45,14 +49,17 @@ namespace FP.Study.KNN.Hopfield
                         //  Console.WriteLine("Teste");
                         //  Console.WriteLine(testPattern);
 
-                        var testingVector = Vector<double>.Build.DenseOfArray(testPattern.CreateVectorData(5, 3));
+                        var testingVector = Vector<double>.Build.DenseOfArray(testPattern.CreateVectorData(7, 7));
 
                         NeuralVector outputVector;
 
                         outputVector = network.Test(new NeuralVector(testingVector));
                         var outputPattern = MapToPattern(outputVector, scenario.LineCount, scenario.ColumnCount);
 
-                        if (testPattern.ToString() == outputPattern.ToString())
+                        Console.WriteLine("Ergebnis");
+                        Console.WriteLine(outputPattern);
+
+                        if (outputPattern.IsEqualValue(testPattern))
                         {
                             matchCount++;
                         }
@@ -60,9 +67,6 @@ namespace FP.Study.KNN.Hopfield
                         {
                             nonMatchCount++;
                         }
-
-                        // Console.WriteLine("Ergebnis");
-                        //Console.WriteLine(outputPattern);
                     }
                     catch (Exception exception)
                     {
