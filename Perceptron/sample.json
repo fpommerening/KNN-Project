@@ -1,0 +1,33 @@
+{
+  "inputNodeCount": 2,
+  "pattern": [
+    {
+      "inputs": [
+        0.0,
+        0.0
+      ],
+      "output": 0.0
+    },
+    {
+      "inputs": [
+        1.0,
+        0.0
+      ],
+      "output": 0.0
+    },
+    {
+      "inputs": [
+        0.0,
+        1.0
+      ],
+      "output": 0.0
+    },
+    {
+      "inputs": [
+        1.0,
+        1.0
+      ],
+      "output": 1.0
+    }
+  ]
+}

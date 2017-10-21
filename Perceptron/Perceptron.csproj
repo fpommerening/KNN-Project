@@ -6,4 +6,18 @@
     <RootNamespace>FP.Study.KNN.Perceptron</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\lib\DotNeuralNet\DotNeuralNet\DotNeuralNet.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="sample.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
