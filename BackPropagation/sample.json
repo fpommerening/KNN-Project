@@ -1,0 +1,43 @@
+﻿{
+  "InputNodeCount": 2,
+  "HiddenNodeCount": 2,
+  "OutputNodeCount": 1,
+  "Pattern": [
+    {
+      "Inputs": [
+        -1.0,
+        -1.0
+      ],
+      "Outputs": [
+        0.0
+      ]
+    },
+    {
+      "Inputs": [
+        1.0,
+        -1.0
+      ],
+      "Outputs": [
+        1.0
+      ]
+    },
+    {
+      "Inputs": [
+        -1.0,
+        1.0
+      ],
+      "Outputs": [
+        1.0
+      ]
+    },
+    {
+      "Inputs": [
+        1.0,
+        1.0
+      ],
+      "Outputs": [
+        1.0
+      ]
+    }
+  ]
+}

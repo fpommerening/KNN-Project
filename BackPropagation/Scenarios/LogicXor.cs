@@ -8,7 +8,7 @@ namespace FP.Study.KNN.BackPropagation.Scenarios
         public LogicXor()
         {
             InputNodeCount = 2;
-            HiddenNodeCount = 2;
+            HiddenNodeCount = 1;
             OutputNodeCount = 1;
             Pattern = new Pattern[]
             {

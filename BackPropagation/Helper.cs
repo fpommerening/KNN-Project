@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using DotNeuralNet;
 using DotNeuralNet.BackPropagation;
+using Newtonsoft.Json;
 
 namespace FP.Study.KNN.BackPropagation
 {
@@ -26,6 +27,18 @@ namespace FP.Study.KNN.BackPropagation
             var rows = GetTrainingRows(scenario);
             trainer.Train(rows, adjust, rounds);
             return network;
+        }
+
+        public static void WriteScenarioToFile(Scenario scenario, string filePath)
+        {
+            string output = JsonConvert.SerializeObject(scenario, Formatting.Indented);
+            File.WriteAllText("text.json", output, Encoding.UTF8);
+        }
+
+        public static Scenario ReadScenarioFromFile(string filePath)
+        {
+            var filecontent = File.ReadAllText(filePath);
+            return JsonConvert.DeserializeObject<Scenario>(filecontent);
         }
     }
 }

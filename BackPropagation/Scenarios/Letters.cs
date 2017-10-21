@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FP.Study.KNN.BackPropagation.Data;
+﻿using FP.Study.KNN.BackPropagation.Data;
 
 namespace FP.Study.KNN.BackPropagation.Scenarios
 {

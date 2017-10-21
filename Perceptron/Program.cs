@@ -15,12 +15,13 @@ namespace FP.Study.KNN.Perceptron
                 Func<double, double> activationFunction = x => x >= 1 ? 1 : 0;
 
                 double adjust = 0.01;
-                int rounds = 10;
+                int rounds = 500;
 
                 //var scenario = new LogicAnd();
                 //var scenario = new LogicXor();
                 var scenario = new LogicOr();
                 //var scenario = Helper.ReadScenarioFromFile("sample.json");
+                //Helper.WriteScenarioToFile(scenario, "sample.json");
 
                 var perceptron = Helper.CreateAndTrainPerceptron(scenario, activationFunction, adjust, rounds);
 
@@ -31,6 +32,7 @@ namespace FP.Study.KNN.Perceptron
             {
                 Console.WriteLine(e);
             }
+            Console.WriteLine("Programmende");
             Console.ReadLine();
         }
 
