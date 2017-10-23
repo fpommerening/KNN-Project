@@ -10,19 +10,20 @@ namespace FP.Study.KNN.BackPropagation
         static void Main(string[] args)
         {
             double adjust = 0.01;
-            int rounds = 1000;
+            int rounds = 2000;
 
-            //var scenario = new LogicOr();
+            var scenario = new LogicOr();
             //var scenario = new LogicXor();
             //var scenario = new LogicAnd();
             //var scenario = new Letters();
-            var scenario = Helper.ReadScenarioFromFile("sample.json");
+            //var scenario = Helper.ReadScenarioFromFile("sample.json");
             //Helper.WriteScenarioToFile(scenario, "sample.json");
 
             var network = Helper.CreateAndTrainNetwork(scenario, adjust, rounds);
             try
             {
                 CreateOutput(scenario, network, adjust, rounds);
+                //CreateOutputSideBySide(scenario, network, adjust, rounds);
             }
             catch (Exception e)
             {
@@ -50,7 +51,33 @@ namespace FP.Study.KNN.BackPropagation
                 Console.WriteLine($"\tAusgabewert(e) erwartet(e): {string.Join(" / ", pattern.Outputs.Select(x => x.ToString("R")))}");
                 Console.WriteLine($"\tAusgabewert(e) ermittelt: : {string.Join(" / ", network.OutputNodes.Select(x => x.Value.ToString("R")))}");
             }
+        }
 
+        private static void CreateOutputSideBySide(Scenario scenario, Network network, double adjust, int rounds)
+        {
+            Console.WriteLine($"Anzahl Eingangswert {scenario.InputNodeCount} / Anzahl Muster {scenario.Pattern.Length}");
+            Console.WriteLine($"Adjust: {adjust:R}  Anzahl Interationen {rounds}");
+            for (int i = 0; i < scenario.Pattern.Length; i++)
+            {
+                var pattern = scenario.Pattern[i];
+                network.Invalidate();
+
+                for (int n = 0; n < scenario.InputNodeCount; n++)
+                {
+                    network.InputNodes[n].Value = pattern.Inputs[n];
+                }
+                Console.WriteLine($"Muster {i}");
+                Console.WriteLine($"Eingangswert(e): {string.Join(" / ", pattern.Inputs.Select(x => x.ToString("R")))}");
+
+                Console.WriteLine("Ausgabewert(e) erwartet / ermittelt");
+
+                for (int j = 0; j < scenario.OutputNodeCount; j++)
+                {
+                    Console.WriteLine($"\t{pattern.Outputs[j]:R} \t {network.OutputNodes[j].Value:R}");
+                }
+
+                Console.ReadKey();
+            }
         }
     }
 }
