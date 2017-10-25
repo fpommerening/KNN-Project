@@ -3,7 +3,6 @@ using FP.Study.KNN.Hopfield.Data;
 using FP.Study.KNN.Hopfield.Scenarios;
 using FP.Study.KNN.Hopfield.Utility;
 using MathNet.Numerics.LinearAlgebra;
-using Newtonsoft.Json;
 
 namespace FP.Study.KNN.Hopfield
 {
@@ -13,11 +12,11 @@ namespace FP.Study.KNN.Hopfield
         {
             try
             {
-                var numbers = new Scenarios.Numbers();
+                var numbers = new Numbers();
+                var letter = new Letters();
 
-
-
-                //     var testPattern = new Pattern
+                //var scenario = numbers.CreateScenario_3_5_0();
+                //     var testNumber = new Pattern
                 //     {
                 //        Lines = new Line[]{
                 //            new Line{ Columns = new double[] {1, 1, 1}},
@@ -27,60 +26,14 @@ namespace FP.Study.KNN.Hopfield
                 //            new Line{ Columns = new double[] {1, 1, 1}},
                 //           }
                 //   };
+                //var testPattern = numbers.Number7;
 
-                //var scenario = numbers.CreateScenario_1_2_7();
-
-                var letter = new Letters();
-                var scenario = letter.CreateScenario_All();
-
-                string output = JsonConvert.SerializeObject(scenario, Formatting.Indented);
-                
-                Console.WriteLine(output);
-                return;
-
+                var scenario = letter.CreateScenario_SelectionBig();
                 var testPattern = letter.LetterA;
 
-                int matchCount = 0;
-                int nonMatchCount = 0;
+                //ExecuteSingle(scenario, testPattern);
+                ExecuteSeries(scenario,testPattern);
 
-                for (int i = 0; i < 10; i++)
-                {
-
-                    try
-                    {
-                        var network = new HopfieldNetwork();
-                        network.TeachWithHebbsRule(scenario);
-
-
-                        //  Console.WriteLine("Teste");
-                        //  Console.WriteLine(testPattern);
-
-                        var testingVector = Vector<double>.Build.DenseOfArray(testPattern.CreateVectorData(7, 7));
-
-                        NeuralVector outputVector;
-
-                        outputVector = network.Test(new NeuralVector(testingVector));
-                        var outputPattern = MapToPattern(outputVector, scenario.LineCount, scenario.ColumnCount);
-
-                        Console.WriteLine("Ergebnis");
-                        Console.WriteLine(outputPattern);
-
-                        if (outputPattern.IsEqualValue(testPattern))
-                        {
-                            matchCount++;
-                        }
-                        else
-                        {
-                            nonMatchCount++;
-                        }
-                    }
-                    catch (Exception exception)
-                    {
-                        Console.WriteLine("Error on Test");
-                        Console.WriteLine(exception);
-                    }
-                }
-                Console.Write($"Treffer {matchCount} - {nonMatchCount}");
             }
             catch (Exception ex)
             {
@@ -88,30 +41,64 @@ namespace FP.Study.KNN.Hopfield
             }
 
             Console.ReadLine();
-
-
         }
 
-        public static Pattern MapToPattern(NeuralVector vector, int lineCount, int columnCount)
+        static void ExecuteSingle(Scenario scenario, Pattern testPattern)
         {
-            var pattern = new Pattern
+            try
             {
-                Lines = new Line[lineCount]
-            };
+                var network = new HopfieldNetwork();
+                network.TeachWithHebbsRule(scenario);
 
-            for (int l = 0; l < lineCount; l++)
+                var testingVector = Vector<double>.Build.DenseOfArray(testPattern.CreateVectorData(7, 7));
+
+                var outputVector = network.Test(new NeuralVector(testingVector));
+                var outputPattern = Helper.MapToPattern(outputVector, scenario.LineCount, scenario.ColumnCount);
+
+                Console.WriteLine("Ergebnis");
+                Console.WriteLine(outputPattern);
+            }
+            catch (Exception exception)
             {
-                pattern.Lines[l] = new Line
-                {
-                    Columns = new double[columnCount]
-                };
+                Console.WriteLine("Error on Test");
+                Console.WriteLine(exception);
+            }
+        }
 
-                for (int c = 0; c < columnCount; c++)
+        static void ExecuteSeries(Scenario scenario, Pattern testPattern)
+        {
+            int matchCount = 0;
+            int nonMatchCount = 0;
+
+            for (int i = 0; i < 1000; i++)
+            {
+                try
                 {
-                    pattern.Lines[l].Columns[c] = vector.Data[l * columnCount + c];
+                    var network = new HopfieldNetwork();
+                    network.TeachWithHebbsRule(scenario);
+
+                    var testingVector = Vector<double>.Build.DenseOfArray(testPattern.CreateVectorData(7, 7));
+
+                    var outputVector = network.Test(new NeuralVector(testingVector));
+                    var outputPattern = Helper.MapToPattern(outputVector, scenario.LineCount, scenario.ColumnCount);
+
+                    if (outputPattern.IsEqualValue(testPattern))
+                    {
+                        matchCount++;
+                    }
+                    else
+                    {
+                        nonMatchCount++;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    Console.WriteLine("Error on Test");
+                    Console.WriteLine(exception);
                 }
             }
-            return pattern;
+            Console.Write($"Ergebnis: Korrekt {matchCount} - Falsch {nonMatchCount}");
         }
+
     }
 }

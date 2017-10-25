@@ -411,7 +411,8 @@ namespace FP.Study.KNN.Hopfield.Scenarios
             };
         }
 
-        public Scenario CreateScenario_Selection()
+
+        public Scenario CreateScenario_SelectionSmall()
         {
             return new Scenario
             {
@@ -419,9 +420,23 @@ namespace FP.Study.KNN.Hopfield.Scenarios
                 LineCount = 7,
                 Pattern = new[]
                 {
-                    LetterA,   LetterG, LetterH,  LetterM,
-                     LetterO, LetterP,  LetterS,
-                    LetterT,    LetterX, LetterZ
+                    LetterA,  LetterK, LetterN,  
+                        LetterT, LetterX
+                }
+            };
+        }
+
+        public Scenario CreateScenario_SelectionBig()
+        {
+            return new Scenario
+            {
+                ColumnCount = 7,
+                LineCount = 7,
+                Pattern = new[]
+                {
+                    LetterA,   LetterE, LetterF,  LetterI,
+                     LetterK, LetterN,  LetterO,
+                    LetterS,    LetterT, LetterX
                 }
             };
         }
