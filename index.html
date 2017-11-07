@@ -30,51 +30,434 @@
 	<div class="reveal">
 		<div class="slides">
 			<section>
-                <h1>Simulation neuronaler Netze für Softwareentwickler</h1>
-                <h3>Frank Pommerening (M010)</h3>
-                <h3>WO-Modul: Künstliche Neuronale Netze</h3>
-            </section>
-            <section>
-                <section>
-                    <h2>Microsoft Machine Learning</h2>
-                </section>
-                <section>
-                    <h3>Cognitive Services</h3>
-                    <ul>
-                        <li></li>
-                    </ul>
-                </section>
-                <section>
-                    <h3>Azure Maschine Learning Studio</h3>
-                    <ul>
-                        <li></li>
-                    </ul>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h2>Bibliotheken für Entwickler</h2>
-                </section>
-                <section>
-                    <h3>Recherche / Auswahl</h3>
-                    Kriterien
-                </section>
-                <section>
-                    <h3>Perceptron</h3>
-                </section>
-                <section>
-                    <h3>BackPropagation</h3>
-                </section>
-                <section>
-                        <h3>Hopfield</h3>
-                </section>
-            </section>
-            <section>
-                <section>
-                        <h2>Fazit</h2>
-                </section>
-                <section></section>
-            </section>
+				<h1>Simulation neuronaler Netze für Softwareentwickler</h1>
+				<h3>Frank Pommerening (M010)</h3>
+				<h3>WO-Modul: Künstliche Neuronale Netze</h3>
+			</section>
+			<section>
+				<section>
+					<h2>Microsoft Machine Learning</h2>
+				</section>
+				<section>
+					<h3>Cognitive Services</h3>
+					<ul>
+						<li>Cloudbasierte APIs für Entwickler</li>
+						<li class="fragment">Hauptbereiche
+							<ul>
+								<li>Vision (Bildanalyse)</li>
+								<li>Speech (Spracheingabe)</li>
+								<li>Language (Sprache)</li>
+								<li>Knowledge (Einblicke und Wissen)</li>
+								<li>Search (Suche)</li>
+							</ul>
+						</li>
+						<li class="fragment">praktische Anwendung von KI steht im Vordergrund</li>
+						<li class="fragment">kein / kaum Einfluss auf die Parameter des Netzes</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Azure Maschine Learning Studio</h3>
+					<ul>
+						<li>Werkzeug zur Analyse großer Datenbestände mit neuronalen Netzen</li>
+						<li>Ziel ist die Erstellung von Modell für Vorhersagen</li>
+					</ul>
+					<br />
+					<img src="images/mlstudio.png" class="fragment" />
+				</section>
+				<section>
+					<img src="images/ml_network.png" style="float:right;margin-right:100px" /> Für das Training des Modells kommen
+					<br/> KNN zum Einsatz.
+					<br />
+					<br /> Änderungen in den Einstellung führen zu unterschiedlichen Vorhersagen.
+					<br />
+					<br /> Azure Maschine Learning Studio erlaubt durch Parameter verschiedene Simulationen. Ziel ist die Modellerstellung im
+					Data-Science-Umfeld für praktische Anwendung (Vorhersagen).
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Bibliotheken für Entwickler</h2>
+				</section>
+				<section>
+					<h3>Recherche / Auswahl</h3>
+					<div style="width: 90%; display: table;">
+						<div style="display: table-row">
+							<div style="display: table-cell;width:500px" class="fragment">
+								Kriterien
+								<br/>
+								<ul>
+									<li>Unterstützung gängiger Netzarten / Topologien</li>
+									<li>Quelltext verfügbar</li>
+									<li>Offene Lizenz z.B. MIT</li>
+									<li>Keine Spezial-Netze: Bilderkennung / Spiele-KI</li>
+									<li>Sprache C# / .NET</li>
+									<li>UI (untergeordnet)</li>
+								</ul>
+
+							</div>
+							<div style="display: table-cell" class="fragment">
+								Entscheidung
+								<br />
+								<ul>
+									<li>DotNeuralNet (.NET Core 2 Fork)</li>
+									<li>NeuralNetworks (Auszüge)</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section>
+					<h3>Umsetzung</h3>
+					<ul>
+						<li>Umsetzung als .NET Core 2 Consolenanwendungen</li>
+						<li>Verwendung von Microsoft Visual Studio Code (Plattformunabhängig)</li>
+						<li>Je Toplogie ein eigenes Projekt</li>
+						<li>Trainingsdaten / Netzkonfigurationen sind Szenarien
+							<ul>
+								<li>Defintion per Code</li>
+								<li>Austausch per json-Dateien</li>
+							</ul>
+						</li>
+						<li>Erstellung von Ausgabefunktionen zur strukturierten Anzeige</li>
+						<li>Keine bzw. minimale Anpassungen am Code der Bibliotheken</li>
+					</ul>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>Perceptron</h3>
+					(linearen Feed forward-Netze)
+				</section>
+				<section>
+					<h4> Logische Funktionen</h4>
+					<ul>
+						<li>
+							<i>OR</i>: korrekte Erkennung ab 30 Lernzyklen</li>
+						<li>
+							<i>AND</i>: korrekte Erkennung ab 35 Lernzyklen</li>
+						<li>
+							<i>XOR</i>: keine korrekte Erkennung</li>
+					</ul>
+					<br />
+					<br /> Besonderheiten: Perceptron liefert keine Zwischenwerte nur 0 oder 1.
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>BackPropagation</h3>
+					(nicht linearen, überwachten Feed forward-Netze)
+				</section>
+				<section>
+					<h4>Logische Funktionen</h4>
+					<i>OR</i> - korrekte Erkennung
+					<table>
+						<tr>
+							<th colspan="2">Eingaben</td>
+								<th>Ausgabe</td>
+									<th colspan="3" style="text-align:center">Ausgabe (ist)</td>
+						</tr>
+						<tr>
+							<th>1</th>
+							<th>2</th>
+							<th>(soll)</th>
+							<th>100 Zyklen</th>
+							<th>1000 Zyklen</th>
+							<th>5000 Zyklen</th>
+						</tr>
+						<tr>
+							<td>-1</td>
+							<td>-1</td>
+							<td>0</td>
+							<td>0,358301</td>
+							<td>0,271593</td>
+							<td>0,244592</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>-1</td>
+							<td>1</td>
+							<td>0,559563</td>
+							<td>0,897811</td>
+							<td>0,953947</td>
+						</tr>
+						<tr>
+							<td>-1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>0,423526</td>
+							<td>0,902807</td>
+							<td>0,962016</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>0,584708</td>
+							<td>0,942219</td>
+							<td>0,980804</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<i>AND</i> - korrekte Erkennung
+					<table>
+						<tr>
+							<th colspan="2">Eingaben</td>
+								<th>Ausgabe</td>
+									<th colspan="3" style="text-align:center">Ausgabe (ist)</td>
+						</tr>
+						<tr>
+							<th>1</th>
+							<th>2</th>
+							<th>(soll)</th>
+							<th>100 Zyklen</th>
+							<th>1000 Zyklen</th>
+							<th>5000 Zyklen</th>
+						</tr>
+						<tr>
+							<td>-1</td>
+							<td>-1</td>
+							<td>0</td>
+							<td>0,392078</td>
+							<td>0,095111</td>
+							<td>0,034686</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>-1</td>
+							<td>0</td>
+							<td>0,559563</td>
+							<td>0,292244</td>
+							<td>0,258249</td>
+						</tr>
+						<tr>
+							<td>-1</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0,423526</td>
+							<td>0,244928</td>
+							<td>0,175064</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>0,584708</td>
+							<td>0,799491</td>
+							<td>0,919510</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<i>XOR</i> - keine korrekte Erkennung
+					<table>
+						<tr>
+							<th colspan="2">Eingaben</td>
+								<th>Ausgabe</td>
+									<th colspan="3" style="text-align:center">Ausgabe (ist)</td>
+						</tr>
+						<tr>
+							<th>1</th>
+							<th>2</th>
+							<th>(soll)</th>
+							<th>500 Zyklen</th>
+							<th>5000 Zyklen</th>
+							<th>1000 Zyklen</th>
+						</tr>
+						<tr>
+							<td>-1</td>
+							<td>-1</td>
+							<td>0</td>
+							<td>0,399293</td>
+							<td>0,098132</td>
+							<td>0,069219</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>-1</td>
+							<td>1</td>
+							<td>0,519994</td>
+							<td>0,098431</td>
+							<td>0,061897</td>
+						</tr>
+						<tr>
+							<td>-1</td>
+							<td>1</td>
+							<td>1</td>
+							<td>0,533822</td>
+							<td>0,098428</td>
+							<td>0,061881</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>1</td>
+							<td>0</td>
+							<td>0,576996</td>
+							<td>0,094537</td>
+							<td>0,061360</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Hopfield-Netz</h3>
+					(rekurrente Netze)
+				</section>
+				<section>
+					<h4>Zahlenerkennung</h4>
+					<ul>
+						<li>Darstellung der Zahlen 0 - 9 als 3 x 5 Raster</li>
+						<li>Durchführung von 1000 Durchläufen</li>
+						<li>nur ein eindeutiger Treffer gilt als korrekt</li>
+					</ul>
+					<br />
+					<table>
+						<tr>
+							<td></td>
+							<td>1</td>
+							<td>2</td>
+							<td>4</td>
+							<td>7</td>
+							<td>9</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario 1 - 2 - 7</th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>709</td>
+							<td>1000</td>
+							<td>--</td>
+							<td>1000</td>
+							<td>--</td>
+							<td>--</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>291</td>
+							<td>0</td>
+							<td>--</td>
+							<td>0</td>
+							<td>--</td>
+							<td>--</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario 0 - 9 </th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>844</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>156</td>
+							<td>1000</td>
+						</tr>
+					</table>
+				</section>
+				<section>
+					<h4>Buchstabenerkennung</h4>
+					<ul>
+						<li>Darstellung der Buchstaben A - Z als 7 x 7 Raster</li>
+						<li>Durchführung von 1000 Durchläufen</li>
+						<li>nur ein eindeutiger Treffer gilt als korrekt</li>
+					</ul>
+				</section>
+				<section>
+					<table>
+						<tr>
+							<td></td>
+							<td>A</td>
+							<td>F</td>
+							<td>I</td>
+							<td>K</td>
+							<td>T</td>
+							<td>X</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario A - K - N - T - X</th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>1000</td>
+							<td>--</td>
+							<td>--</td>
+							<td>154</td>
+							<td>1000</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>0</td>
+							<td>--</td>
+							<td>--</td>
+							<td>846</td>
+							<td>0</td>
+							<td>1000</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario 10 Buchstaben</th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>0</td>
+							<td>491</td>
+							<td>36</td>
+							<td>0</td>
+							<td>1000</td>
+							<td>106</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>A</td>
+							<td>509</td>
+							<td>964</td>
+							<td>1000</td>
+							<td>0</td>
+							<td>894</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario alle Buchstaben</th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>386</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>614</td>
+						</tr>
+					</table>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h2>Fazit</h2>
+				</section>
+				<section></section>
+			</section>
 
 		</div>
 	</div>
