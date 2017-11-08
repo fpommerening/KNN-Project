@@ -71,7 +71,7 @@
 					<br /> Änderungen in den Einstellung führen zu unterschiedlichen Vorhersagen.
 					<br />
 					<br /> Azure Maschine Learning Studio erlaubt durch Parameter verschiedene Simulationen. Ziel ist die Modellerstellung im
-					Data-Science-Umfeld für praktische Anwendung (Vorhersagen).
+					Data-Science-Umfeld für praktische Anwendungen (Vorhersagen).
 				</section>
 			</section>
 			<section>
@@ -114,7 +114,7 @@
 						<li>Je Toplogie ein eigenes Projekt</li>
 						<li>Trainingsdaten / Netzkonfigurationen sind Szenarien
 							<ul>
-								<li>Defintion per Code</li>
+								<li>Definition per Code</li>
 								<li>Austausch per json-Dateien</li>
 							</ul>
 						</li>
@@ -305,6 +305,91 @@
 					<h3>Hopfield-Netz</h3>
 					(rekurrente Netze)
 				</section>
+
+				<section>
+					<h4>Buchstabenerkennung</h4>
+					<ul>
+						<li>Darstellung der Buchstaben A - Z als 7 x 7 Raster</li>
+						<li>Durchführung von 1000 Durchläufen</li>
+						<li>nur ein eindeutiger Treffer gilt als korrekt</li>
+					</ul>
+				</section>
+				<section>
+					<table>
+						<tr>
+							<td></td>
+							<td>A</td>
+							<td>F</td>
+							<td>I</td>
+							<td>K</td>
+							<td>T</td>
+							<td>X</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario A - K - N - T - X</th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>1000</td>
+							<td>--</td>
+							<td>--</td>
+							<td>154</td>
+							<td>1000</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>0</td>
+							<td>--</td>
+							<td>--</td>
+							<td>846</td>
+							<td>0</td>
+							<td>1000</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario 10 Buchstaben</th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>0</td>
+							<td>491</td>
+							<td>36</td>
+							<td>0</td>
+							<td>1000</td>
+							<td>106</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>1000</td>
+							<td>509</td>
+							<td>964</td>
+							<td>1000</td>
+							<td>0</td>
+							<td>894</td>
+						</tr>
+						<tr>
+							<th colspan="7" style="text-align:center">Szenario alle Buchstaben</th>
+						</tr>
+						<tr>
+							<td>Korrekt</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>0</td>
+							<td>386</td>
+						</tr>
+						<tr>
+							<td>Falsch</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>1000</td>
+							<td>614</td>
+						</tr>
+					</table>
+				</section>
 				<section>
 					<h4>Zahlenerkennung</h4>
 					<ul>
@@ -367,98 +452,42 @@
 						</tr>
 					</table>
 				</section>
-				<section>
-					<h4>Buchstabenerkennung</h4>
-					<ul>
-						<li>Darstellung der Buchstaben A - Z als 7 x 7 Raster</li>
-						<li>Durchführung von 1000 Durchläufen</li>
-						<li>nur ein eindeutiger Treffer gilt als korrekt</li>
-					</ul>
-				</section>
-				<section>
-					<table>
-						<tr>
-							<td></td>
-							<td>A</td>
-							<td>F</td>
-							<td>I</td>
-							<td>K</td>
-							<td>T</td>
-							<td>X</td>
-						</tr>
-						<tr>
-							<th colspan="7" style="text-align:center">Szenario A - K - N - T - X</th>
-						</tr>
-						<tr>
-							<td>Korrekt</td>
-							<td>1000</td>
-							<td>--</td>
-							<td>--</td>
-							<td>154</td>
-							<td>1000</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<td>Falsch</td>
-							<td>0</td>
-							<td>--</td>
-							<td>--</td>
-							<td>846</td>
-							<td>0</td>
-							<td>1000</td>
-						</tr>
-						<tr>
-							<th colspan="7" style="text-align:center">Szenario 10 Buchstaben</th>
-						</tr>
-						<tr>
-							<td>Korrekt</td>
-							<td>0</td>
-							<td>491</td>
-							<td>36</td>
-							<td>0</td>
-							<td>1000</td>
-							<td>106</td>
-						</tr>
-						<tr>
-							<td>Falsch</td>
-							<td>A</td>
-							<td>509</td>
-							<td>964</td>
-							<td>1000</td>
-							<td>0</td>
-							<td>894</td>
-						</tr>
-						<tr>
-							<th colspan="7" style="text-align:center">Szenario alle Buchstaben</th>
-						</tr>
-						<tr>
-							<td>Korrekt</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>0</td>
-							<td>386</td>
-						</tr>
-						<tr>
-							<td>Falsch</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>1000</td>
-							<td>614</td>
-						</tr>
-					</table>
-				</section>
 			</section>
 			<section>
 				<section>
 					<h2>Fazit</h2>
 				</section>
-				<section></section>
-			</section>
+				<section>
+					<p>
+						Neuronale Netz als Service z.B. Microsoft Machine Learning
+						<br/>
+						<ul class="fragment">
+							<li>Praktische Anwendung im Fokus</li>
+							<li>kein bis mittlerer Einfluss auf Netze</li>
+							<li>Pflege der Netze durch den Hersteller</li>
+						</ul>
+					</p>
+					<br />
+					<p class="fragment">
+						Quelloffene Bibliotheken
+						<br />
+						<ul class="fragment">
+							<li>großer Einfluss auf Netze / Simulation - Fehlschläge möglich</li>
+							<li>Wenn Programmierkenntnisse vorhanden - gutes pädagisches Werkzeug
+								<ul>
+									<li>Verknüpfung zwischen Theorie und Praxis</li>
+									<li>Beobachtung innerer Abläufe per Debugger</li>
+									<li>Schnelle / einfache Umsetzung von Szenarien</li>
+								</ul>
+							</li>
+						</ul>
+					</p>
+				</section>
 
+			</section>
+			<section>
+				<h2>Vielen Dank für die Aufmerksamkeit</h2>
+			</section>
 		</div>
 	</div>
 
